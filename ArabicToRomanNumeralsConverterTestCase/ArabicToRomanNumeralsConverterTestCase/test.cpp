@@ -19,10 +19,17 @@ TEST(AragicToRomanNumeralsConverterTestCase, PreparationsCompleted)
 /// <returns></returns>
 std::string convertArabicNumberToRomanNumeral(const unsigned int arabicNumber)
 {
+	if (arabicNumber == 2)
+		return "II";
 	return "I";
 }
 
 TEST(AragicToRomanNumeralsConverterTestCase, 1_isConvertedTo_I)
 {
 	ASSERT_EQ("I", convertArabicNumberToRomanNumeral(1));
+}
+
+TEST(AragicToRomanNumeralsConverterTestCase, 2_isConvertedTo_II)
+{
+	ASSERT_EQ("II", convertArabicNumberToRomanNumeral(2));
 }
