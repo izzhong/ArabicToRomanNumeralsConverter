@@ -1,5 +1,7 @@
 #include "pch.h"
 
+
+
 int main(int argc, char* argv[])
 {
 	testing::InitGoogleTest(&argc, argv);
@@ -33,6 +35,27 @@ std::string convertArabicNumberToRomanNumeral(unsigned int arabicNumber)
 	return romanString;
 }
 
+class RomanNumeralAssert
+{
+public:
+	RomanNumeralAssert() = delete;
+	explicit RomanNumeralAssert(const unsigned int arabicNumber) :
+		arabicNumberToConvert(arabicNumber) {}
+	void isConvertedToRomanNumeral(const std::string& expectedRomanNumeral) const
+	{
+		ASSERT_EQ(expectedRomanNumeral, convertArabicNumberToRomanNumeral(arabicNumberToConvert));
+	}
+private:
+	const unsigned int arabicNumberToConvert;
+};
+
+RomanNumeralAssert assertThat(const unsigned int arabicNumber)
+{
+	return RomanNumeralAssert{ arabicNumber };
+}
+
+// 观察这些测试，他们冗余非常高，重复且不优雅
+// 测试代码也应该被重构
 TEST(AragicToRomanNumeralsConverterTestCase, 1_isConvertedTo_I)
 {
 	ASSERT_EQ("I", convertArabicNumberToRomanNumeral(1));
@@ -61,4 +84,12 @@ TEST(AragicToRomanNumeralsConverterTestCase, 20_isConvertedTo_XX)
 TEST(AragicToRomanNumeralsConverterTestCase, 30_isConvertedTo_XXX)
 {
 	ASSERT_EQ("XXX", convertArabicNumberToRomanNumeral(30));
+}
+
+// 重构测试
+TEST(AragicToRomanNumeralsConverterTestCase, 33_isConvertedTo_XXXIII)
+{
+	// ASSERT_EQ("XXXIII", convertArabicNumberToRomanNumeral(33));
+	// 使用一个自定义的测试
+	assertThat(33).isConvertedToRomanNumeral("XXXIII");
 }
