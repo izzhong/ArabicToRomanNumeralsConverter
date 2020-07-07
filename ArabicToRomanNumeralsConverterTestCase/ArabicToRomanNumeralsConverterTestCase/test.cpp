@@ -14,6 +14,24 @@ TEST(AragicToRomanNumeralsConverterTestCase, PreparationsCompleted)
 	GTEST_SUCCEED();
 }
 
+struct ArabicToRomanMapping
+{
+	unsigned int arabicNumber;
+	std::string romanNumeral;
+};
+
+constexpr std::size_t numberOfMappings{ 3 };
+using ArabicToRomanMappings = std::array<ArabicToRomanMapping, numberOfMappings>;
+const ArabicToRomanMappings arabicToRomanMappings{ {
+	{100,"C"},
+	{10,"X"},
+	{1,"I"},
+}};
+
+std::array<int, 10> ar {
+	{1,2,3,4,5,6}
+};
+
 /// <summary>
 /// 将给定正整数参数转换为罗马数字字符串
 /// </summary>
@@ -22,20 +40,13 @@ TEST(AragicToRomanNumeralsConverterTestCase, PreparationsCompleted)
 std::string convertArabicNumberToRomanNumeral(unsigned int arabicNumber)
 {
 	std::string romanString{};
-	while (arabicNumber >= 100)
+	for (const auto& mapping : arabicToRomanMappings)
 	{
-		romanString.push_back('C');
-		arabicNumber -= 100;
-	}
-	while (arabicNumber >= 10)
-	{
-		romanString.push_back('X');
-		arabicNumber -= 10;
-	}
-	while (arabicNumber >= 1)
-	{
-		romanString.push_back('I');
-		--arabicNumber;
+		while (arabicNumber >= mapping.arabicNumber)
+		{
+			romanString += mapping.romanNumeral;
+			arabicNumber -= mapping.arabicNumber;
+		}
 	}
 	return romanString;
 }
@@ -59,17 +70,7 @@ RomanNumeralAssert assertThat(const unsigned int arabicNumber)
 	return RomanNumeralAssert{ arabicNumber };
 }
 
-struct ArabicToRomanMapping
-{
-	unsigned int arabicNumber;
-	std::string romanNumeral;
-};
 
-constexpr std::size_t numberOfMappings = 1;
-using ArabicToRomanMappings = std::array<ArabicToRomanMapping, numberOfMappings>;
-const ArabicToRomanMappings arabicToRomanMappings {
-	{100,"C"},
-};
 
 // 观察这些测试，他们冗余非常高，重复且不优雅
 // 测试代码也应该被重构
