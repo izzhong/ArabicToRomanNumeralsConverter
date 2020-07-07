@@ -19,15 +19,12 @@ TEST(AragicToRomanNumeralsConverterTestCase, PreparationsCompleted)
 /// <returns></returns>
 std::string convertArabicNumberToRomanNumeral(unsigned int arabicNumber)
 {
-	if (arabicNumber == 10)
-		return "X";
-	if (arabicNumber == 20)
-		return "XX";
-	if (arabicNumber == 30)
-		return "XXX";
-
-
 	std::string romanString{};
+	while (arabicNumber >= 10)
+	{
+		romanString.push_back('X');
+		arabicNumber -= 10;
+	}
 	while (arabicNumber >= 1)
 	{
 		romanString.push_back('I');
