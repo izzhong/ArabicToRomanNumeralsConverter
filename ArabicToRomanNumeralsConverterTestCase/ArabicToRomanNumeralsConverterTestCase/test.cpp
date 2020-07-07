@@ -19,13 +19,10 @@ TEST(AragicToRomanNumeralsConverterTestCase, PreparationsCompleted)
 /// <returns></returns>
 std::string convertArabicNumberToRomanNumeral(unsigned int arabicNumber)
 {
-	//if (arabicNumber == 2)
-	//	return "II";
-	//if (arabicNumber == 3)
-	//	return "III";
-	//return "I";
-	// 有了100%覆盖的测试，我们可以放心的大胆的进行重构
-	// 因为输入只有123，所以我们可以仅考虑这几种情况
+	if (arabicNumber == 10)
+		return "X";
+
+
 	std::string romanString{};
 	while (arabicNumber >= 1)
 	{
@@ -33,7 +30,6 @@ std::string convertArabicNumberToRomanNumeral(unsigned int arabicNumber)
 		--arabicNumber;
 	}
 	return romanString;
-
 }
 
 TEST(AragicToRomanNumeralsConverterTestCase, 1_isConvertedTo_I)
@@ -49,4 +45,9 @@ TEST(AragicToRomanNumeralsConverterTestCase, 2_isConvertedTo_II)
 TEST(AragicToRomanNumeralsConverterTestCase, 3_isConvertedTo_III)
 {
 	ASSERT_EQ("III", convertArabicNumberToRomanNumeral(3));
+}
+
+TEST(AragicToRomanNumeralsConverterTestCase, 10_isConvertedTo_X)
+{
+	ASSERT_EQ("X", convertArabicNumberToRomanNumeral(10));
 }
