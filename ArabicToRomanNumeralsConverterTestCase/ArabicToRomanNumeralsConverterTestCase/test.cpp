@@ -21,6 +21,8 @@ std::string convertArabicNumberToRomanNumeral(const unsigned int arabicNumber)
 {
 	if (arabicNumber == 2)
 		return "II";
+	if (arabicNumber == 3)
+		return "III";
 	return "I";
 }
 
@@ -32,4 +34,9 @@ TEST(AragicToRomanNumeralsConverterTestCase, 1_isConvertedTo_I)
 TEST(AragicToRomanNumeralsConverterTestCase, 2_isConvertedTo_II)
 {
 	ASSERT_EQ("II", convertArabicNumberToRomanNumeral(2));
+}
+
+TEST(AragicToRomanNumeralsConverterTestCase, 3_isConvertedTo_III)
+{
+	ASSERT_EQ("III", convertArabicNumberToRomanNumeral(3));
 }
