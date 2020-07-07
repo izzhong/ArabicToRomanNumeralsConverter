@@ -1,5 +1,5 @@
 #include "pch.h"
-
+#include <array>
 
 
 int main(int argc, char* argv[])
@@ -58,6 +58,18 @@ RomanNumeralAssert assertThat(const unsigned int arabicNumber)
 {
 	return RomanNumeralAssert{ arabicNumber };
 }
+
+struct ArabicToRomanMapping
+{
+	unsigned int arabicNumber;
+	std::string romanNumeral;
+};
+
+constexpr std::size_t numberOfMappings = 1;
+using ArabicToRomanMappings = std::array<ArabicToRomanMapping, numberOfMappings>;
+const ArabicToRomanMappings arabicToRomanMappings {
+	{100,"C"},
+};
 
 // 观察这些测试，他们冗余非常高，重复且不优雅
 // 测试代码也应该被重构
