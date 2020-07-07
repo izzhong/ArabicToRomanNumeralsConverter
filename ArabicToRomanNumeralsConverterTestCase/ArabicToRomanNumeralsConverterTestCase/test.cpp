@@ -93,3 +93,9 @@ TEST(AragicToRomanNumeralsConverterTestCase, 33_isConvertedTo_XXXIII)
 	// 使用一个自定义的测试
 	assertThat(33).isConvertedToRomanNumeral("XXXIII");
 }
+
+// 整合测试
+TEST(AragicToRomanNumeralsConverterTestCase, conversionOfArabicNumbersToRomanNumerals_Works)
+{
+	assertThat(33).isConvertedToRomanNumeral("XXXIII");
+}
