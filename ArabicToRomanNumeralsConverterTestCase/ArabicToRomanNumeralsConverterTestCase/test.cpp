@@ -22,6 +22,11 @@ TEST(AragicToRomanNumeralsConverterTestCase, PreparationsCompleted)
 std::string convertArabicNumberToRomanNumeral(unsigned int arabicNumber)
 {
 	std::string romanString{};
+	while (arabicNumber >= 100)
+	{
+		romanString.push_back('C');
+		arabicNumber -= 100;
+	}
 	while (arabicNumber >= 10)
 	{
 		romanString.push_back('X');
@@ -98,4 +103,7 @@ TEST(AragicToRomanNumeralsConverterTestCase, 33_isConvertedTo_XXXIII)
 TEST(AragicToRomanNumeralsConverterTestCase, conversionOfArabicNumbersToRomanNumerals_Works)
 {
 	assertThat(33).isConvertedToRomanNumeral("XXXIII");
+	assertThat(100).isConvertedToRomanNumeral("C");
+	assertThat(200).isConvertedToRomanNumeral("CC");
+	assertThat(300).isConvertedToRomanNumeral("CCC");
 }
