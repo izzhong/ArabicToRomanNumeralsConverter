@@ -1,6 +1,5 @@
 #include "pch.h"
-#include <array>
-
+#include "roman_numeral_assert.h"
 
 int main(int argc, char* argv[])
 {
@@ -13,73 +12,6 @@ TEST(AragicToRomanNumeralsConverterTestCase, PreparationsCompleted)
 	// GTEST_FAIL();
 	GTEST_SUCCEED();
 }
-
-struct ArabicToRomanMapping
-{
-	unsigned int arabicNumber;
-	std::string romanNumeral;
-};
-
-constexpr std::size_t numberOfMappings{ 13 };
-using ArabicToRomanMappings = std::array<ArabicToRomanMapping, numberOfMappings>;
-const ArabicToRomanMappings arabicToRomanMappings{ {
-	{1000,"M"},
-	{900,"CM"},
-	{500,"D"},
-	{400,"CD"},
-	{100,"C"},
-	{90,"XC"},
-	{50,"L"},
-	{40,"XL"},
-	{10,"X"},
-	{9,"IX"},
-	{5,"V"},
-	{4,"IV"},
-	{1,"I"},
-}};
-
-std::array<int, 10> ar {
-	{1,2,3,4,5,6}
-};
-
-/// <summary>
-/// 将给定正整数参数转换为罗马数字字符串
-/// </summary>
-/// <param name="arabicNumber"></param>
-/// <returns></returns>
-std::string convertArabicNumberToRomanNumeral(unsigned int arabicNumber)
-{
-	std::string romanString{};
-	for (const auto& mapping : arabicToRomanMappings)
-	{
-		while (arabicNumber >= mapping.arabicNumber)
-		{
-			romanString += mapping.romanNumeral;
-			arabicNumber -= mapping.arabicNumber;
-		}
-	}
-	return romanString;
-}
-
-class RomanNumeralAssert
-{
-public:
-	RomanNumeralAssert() = delete;
-	explicit RomanNumeralAssert(const unsigned int arabicNumber) :
-		arabicNumberToConvert(arabicNumber) {}
-	void isConvertedToRomanNumeral(const std::string& expectedRomanNumeral) const
-	{
-		ASSERT_EQ(expectedRomanNumeral, convertArabicNumberToRomanNumeral(arabicNumberToConvert));
-	}
-private:
-	const unsigned int arabicNumberToConvert;
-};
-
-RomanNumeralAssert assertThat(const unsigned int arabicNumber)
-{
-	return RomanNumeralAssert{ arabicNumber };
-}
-
 
 
 // 观察这些测试，他们冗余非常高，重复且不优雅

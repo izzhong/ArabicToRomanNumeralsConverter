@@ -33,7 +33,10 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClInclude Include="arabic_to_roman_mapping.h" />
+    <ClInclude Include="convert_arabic_to_roman.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="roman_numeral_assert.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp" />
